@@ -17,7 +17,7 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 global.base = path.join(__dirname + '/file-management/', '..', '.');
 
 // connect to db
-mongoose.connect(require('./config/auth.json').mongoLogin, {useNewUrlParser: true})
+//mongoose.connect(require('./config/auth.json').mongoLogin, {useNewUrlParser: true})
 
 const start = async (port) => {
     // Couple Next.js with our express server.
@@ -25,7 +25,6 @@ const start = async (port) => {
     await next(app);
 
     app.use(require('./middleware/res'))
-    app.use(require('./middleware/jwtHandler').express)
     app.use('/', require('./controllers'));
 
     app.listen(port);

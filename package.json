@@ -1,0 +1,52 @@
+{
+    "author": {
+      "name": "Maxwell Chandler",
+      "email": "maxchandler@protonmail.com"
+    },
+    "scripts": {
+      "build": "next build",
+      "start": "env NODE_ENV=production node app.js",
+      "dev": "nodemon --ignore app/ app.js"
+    },
+    "dependencies": {
+      "@babel/polyfill": "^7.2.5",
+      "@babel/preset-react": "^7.0.0",
+      "@babel/runtime": "^7.3.1",
+      "@zeit/next-sass": "^1.0.0",
+      "axios": "^0.18.0",
+      "babel": "^6.23.0",
+      "babel-loader": "^8.0.5",
+      "babel-polyfill": "^6.26.0",
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.18.2",
+      "cookie-parser": "^1.4.3",
+      "dotenv": "^6.2.0",
+      "dotenv-webpack": "^1.7.0",
+      "es6-promise": "^4.2.6",
+      "express": "^4.16.2",
+      "formidable": "^1.2.1",
+      "google-maps-react": "^2.0.2",
+      "isomorphic-fetch": "^2.2.1",
+      "jwt-simple": "^0.5.5",
+      "moment": "^2.24.0",
+      "mongoose": "^5.4.2",
+      "morgan": "^1.9.0",
+      "next": "latest",
+      "node-sass": "^4.7.2",
+      "normalize-scss": "^7.0.1",
+      "react": "^16.7.0",
+      "react-datepicker": "^2.1.0",
+      "react-dom": "^16.7.0",
+      "react-router": "^4.3.1",
+      "react-router-dom": "^4.3.1",
+      "universal-cookie": "^3.0.7",
+      "validator": "^10.11.0"
+    },
+    "devDependencies": {
+      "@babel/cli": "^7.2.3",
+      "@babel/core": "^7.3.3",
+      "@babel/plugin-transform-runtime": "^7.2.0",
+      "@babel/preset-env": "^7.3.1"
+    }
+  }
+  

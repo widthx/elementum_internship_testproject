@@ -9,8 +9,18 @@ class MoviePoster extends Component {
 
     render() {
         return (
-            <div className="movie_poster"
-                style={{ backgroundImage: "url('https://image.tmdb.org/t/p/w300"+this.props.meta.poster_path+"')"}}>
+
+            <div className="movie_poster">
+                <div className="flip-card-inner">
+                    <div className="flip-card-front">
+                        <img src={`https://image.tmdb.org/t/p/w200${this.props.meta.poster_path}`} />
+                    </div>
+                    <div className="flip-card-back">
+                        <h3>{this.props.meta.title}</h3> 
+                        <p>{this.props.meta.overview}</p>
+                        <button>more info</button>
+                    </div>
+                </div>            
             </div>
         )
     }

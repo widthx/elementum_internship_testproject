@@ -6,9 +6,12 @@ import queryString from 'query-string'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import '../styles/globals.scss';
+import '../styles/home.scss';
+
 import { api } from '../config/api.js';
 
 import MoviePoster from '../components/MoviePoster'
+import Nav from '../components/Nav'
 
 class Index extends Component {
     constructor(props) {
@@ -35,8 +38,7 @@ class Index extends Component {
     generate_posters = () => {
         let posters = [];
         for (let a in this.state.popular_movies) {
-            posters.push(<MoviePoster meta={this.state.popular_movies[a]} key={a}>
-            </MoviePoster>)
+            posters.push(<MoviePoster meta={this.state.popular_movies[a]} key={a}></MoviePoster>)
         }
         return (posters);
     }
@@ -44,8 +46,10 @@ class Index extends Component {
     render() {
         return (
             <div>
-                <FontAwesomeIcon icon='search'/>
-                {this.generate_posters()}
+                <Nav></Nav>
+                <div className="movie_posters">
+                    {this.generate_posters()}
+                </div>
             </div>
         )
     }

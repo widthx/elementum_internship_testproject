@@ -1,1 +1,11 @@
 @import "../node_modules/normalize-scss/sass/normalize/import-now";
+@import 'node_modules/@fortawesome/fontawesome-svg-core/styles';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.movie_posters {
+    margin-top: 20px;
+}

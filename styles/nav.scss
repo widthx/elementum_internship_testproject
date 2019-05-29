@@ -1,4 +1,21 @@
 .nav {
     width: 100%;
     height: 80px;
+    background: #222;
+    display: flex;
+    justify-content: left;
+    align-items: center; 
+    
+    .searchBar {
+        width: 300px;
+        height: 30px;
+        margin-left: 20px;
+
+        svg {
+            color: #ccc;
+        }
+        input {
+            height: 100%;
+        }
+    }
 }

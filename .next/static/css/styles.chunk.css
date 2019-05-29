@@ -402,5 +402,10 @@ template {
 [hidden] {
   display: none; }
 
+.movie_poster {
+  width: 300px;
+  height: 400px;
+  display: inline-block; }
+
 
 /*# sourceMappingURL=styles.chunk.css.map*/

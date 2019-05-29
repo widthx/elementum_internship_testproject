@@ -3,6 +3,7 @@ import "isomorphic-fetch"
 import React, { Component } from 'react';
 import axios from 'axios'
 import queryString from 'query-string'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import '../styles/globals.scss';
 import { api } from '../config/api.js';
@@ -43,6 +44,7 @@ class Index extends Component {
     render() {
         return (
             <div>
+                <FontAwesomeIcon icon='search'/>
                 {this.generate_posters()}
             </div>
         )

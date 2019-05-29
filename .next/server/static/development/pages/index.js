@@ -501,10 +501,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! query-string */ "query-string");
 /* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(query_string__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../styles/globals.scss */ "./styles/globals.scss");
-/* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_scss__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _config_api_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../config/api.js */ "./config/api.js");
-/* harmony import */ var _components_MoviePoster__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/MoviePoster */ "./components/MoviePoster.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../styles/globals.scss */ "./styles/globals.scss");
+/* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_scss__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _config_api_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../config/api.js */ "./config/api.js");
+/* harmony import */ var _components_MoviePoster__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/MoviePoster */ "./components/MoviePoster.js");
+
 
 
 
@@ -536,7 +539,7 @@ function (_Component) {
       var posters = [];
 
       for (var a in _this.state.popular_movies) {
-        posters.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_MoviePoster__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        posters.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_MoviePoster__WEBPACK_IMPORTED_MODULE_14__["default"], {
           meta: _this.state.popular_movies[a],
           key: a
         }));
@@ -558,10 +561,10 @@ function (_Component) {
 
       var query = {
         sort_by: "popularity.desc",
-        api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_12__["api"].key
+        api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_13__["api"].key
       };
       query = query_string__WEBPACK_IMPORTED_MODULE_10___default.a.stringify(query);
-      axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_12__["api"].base + 'discover/movie?' + query).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_13__["api"].base + 'discover/movie?' + query).then(function (res) {
         _this2.setState({
           popular_movies: res.data.results
         });
@@ -572,7 +575,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null, this.generate_posters());
+      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__["FontAwesomeIcon"], {
+        icon: "search"
+      }), this.generate_posters());
     }
   }]);
 
@@ -614,6 +619,17 @@ function (_Component) {
 
 module.exports = __webpack_require__(/*! /Users/maxchandler/Desktop/elementum/test_project/pages/index.js */"./pages/index.js");
 
+
+/***/ }),
+
+/***/ "@fortawesome/react-fontawesome":
+/*!*************************************************!*\
+  !*** external "@fortawesome/react-fontawesome" ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@fortawesome/react-fontawesome");
 
 /***/ }),
 

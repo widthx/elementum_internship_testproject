@@ -203,7 +203,9 @@ function (_Component) {
         className: "searchBar"
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], {
         icon: "search"
-      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("input", null)));
+      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("input", null)), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "right"
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("a", null, "movies")));
     }
   }]);
 

@@ -15,6 +15,9 @@ class Nav extends Component {
                     <FontAwesomeIcon icon='search'/>
                     <input></input>
                 </div>
+                <div className="right">
+                    <a>movies</a>
+                </div>
             </div>
         )
     }

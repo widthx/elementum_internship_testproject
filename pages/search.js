@@ -6,7 +6,7 @@ import queryString from 'query-string'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import '../styles/globals.scss';
-import '../styles/home.scss';
+import '../styles/movie_page.scss';
 
 import { api } from '../config/api.js';
 
@@ -18,27 +18,36 @@ class Index extends Component {
         super(props);
 
         this.state = {
-            popular_movies: []
+            query_results: []
         }
     }
 
-    componentDidMount() {
+    search_movies = (e) => {
+
+        let input = "";
+        if (e) input = e.target.value;
+
         let query = {
-            sort_by: "popularity.desc",
+            query: input,
+            results: [],
             api_key: api.key
         }
         query = queryString.stringify(query);
 
-        axios.get(api.base + 'discover/movie?' + query).then(res => {
-            this.setState({ popular_movies: res.data.results })
-            console.log(this.state.popular_movies)
-        })
+        axios.get(api.base + 'search/movie?' + query).then(res => {
+            this.setState({ query_results: res.data.results })
+            console.log(this.state.query_results)
+        })        
+    }
+
+    componentDidMount() {
+        this.search_movies()
     }
 
     generate_posters = () => {
         let posters = [];
-        for (let a in this.state.popular_movies) {
-            posters.push(<MoviePoster meta={this.state.popular_movies[a]} key={a}></MoviePoster>)
+        for (let a in this.state.query_results) {
+            posters.push(<MoviePoster meta={this.state.query_results[a]} key={a}></MoviePoster>)
         }
         return (posters);
     }
@@ -46,7 +55,14 @@ class Index extends Component {
     render() {
         return (
             <div>
-                <Nav></Nav>
+                <div className="nav">
+                    <div className="left">
+                        <div className="searchBar">
+                            <FontAwesomeIcon icon='search'/>
+                            <input onChange={e => this.search_movies(e)}></input>
+                        </div>
+                    </div>
+                </div>
                 <div className="movie_posters">
                     <div className="container">
                         {this.generate_posters()}

@@ -9,25 +9,44 @@ class Nav extends Component {
         super(props)
     }
 
-    search() {
+    search_redirect() {
         Router.push('/search');
+    }
+
+    search_movies(e) {
+
     }
 
     render() {
         return (
-            <div className="nav">
-                    <div className="left">
-                        <FontAwesomeIcon icon='video'/>
-                        <a href="/discover">Discover</a>
-                        <a href="/movies">Movies</a>
-                    </div>
-                    <div className="right">
-                        <div className="searchBar">
-                            <FontAwesomeIcon icon='search'/>
-                            <input onClick={() => Router.push('/search')}></input>
+            <div>
+                {
+                    !this.props.search ? (
+                        <div className="nav">
+                            <div className="left">
+                                <FontAwesomeIcon icon='video' className="video_icon"/>
+                                <a href="/discover">Discover</a>
+                                <a href="/movies">Movies</a>
+                            </div>
+                            <div className="right">
+                                <div className="searchBar">
+                                    <FontAwesomeIcon icon='search'/>
+                                    <input onClick={() => Router.push('/search')}></input>
+                                </div>
+                                {/* <a>movies</a> */}
+                            </div>
                         </div>
-                        {/* <a>movies</a> */}
-                    </div>
+                    ) : (
+                        <div className="nav">
+                            <div className="left">
+                                <div className="searchBar">
+                                    <FontAwesomeIcon icon='search'/>
+                                    <input onChange={() => this.search_movies()}></input>
+                                </div>
+                            </div>
+                        </div>                      
+                    )
+                }
             </div>
         )
     }

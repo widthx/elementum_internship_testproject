@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import queryString from 'query-string'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Router from 'next/router'
 
 import '../styles/globals.scss';
 import '../styles/home.scss';
@@ -46,9 +47,23 @@ class Index extends Component {
     render() {
         return (
             <div>
-                <Nav></Nav>
+                <div className="nav">
+                    <div className="left">
+                        <FontAwesomeIcon icon='video' className="video_icon"/>
+                        <a href="/discover">Discover</a>
+                        <a href="/movies">Movies</a>
+                    </div>
+                    <div className="right">
+                        <div className="searchBar">
+                            <FontAwesomeIcon icon='search'/>
+                            <input onClick={() => Router.push('/search')}></input>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="movie_posters">
                     <div className="container">
+                        <h3 className="title">Popular Movies</h3>
                         {this.generate_posters()}
                     </div>
                 </div>

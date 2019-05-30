@@ -8,4 +8,8 @@ router.get('/', (req, res) => {
     req.app.render(req, res, '/')
 })
 
+router.get('/movie/:id', (req, res) => {
+    req.app.render(req, res, '/movie')
+})
+
 module.exports = router;

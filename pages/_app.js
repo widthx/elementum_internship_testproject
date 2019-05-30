@@ -2,9 +2,9 @@ import React from 'react';
 import App, { Container } from 'next/app';
 
 import { library, config, dom } from '@fortawesome/fontawesome-svg-core' 
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faVideo } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSearch)
+library.add(faSearch, faVideo )
 config.autoAddCss = false //removes enlarged icons on reload
 
 class MyApp extends App {

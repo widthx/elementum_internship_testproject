@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Router from 'next/router'
 
 import '../styles/nav.scss'
 
@@ -8,16 +9,25 @@ class Nav extends Component {
         super(props)
     }
 
+    search() {
+        Router.push('/search');
+    }
+
     render() {
         return (
             <div className="nav">
-                <div className="searchBar">
-                    <FontAwesomeIcon icon='search'/>
-                    <input></input>
-                </div>
-                <div className="right">
-                    <a>movies</a>
-                </div>
+                    <div className="left">
+                        <FontAwesomeIcon icon='video'/>
+                        <a href="/discover">Discover</a>
+                        <a href="/movies">Movies</a>
+                    </div>
+                    <div className="right">
+                        <div className="searchBar">
+                            <FontAwesomeIcon icon='search'/>
+                            <input onClick={() => Router.push('/search')}></input>
+                        </div>
+                        {/* <a>movies</a> */}
+                    </div>
             </div>
         )
     }

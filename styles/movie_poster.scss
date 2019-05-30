@@ -1,7 +1,7 @@
 @import "variables";
 
 .movie_posters {
-	margin-top: 100px;
+	margin-top: 120px;
 }
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
@@ -49,6 +49,8 @@
 	background-color: #ececec;
 	color: #000;
 	transform: rotateY(180deg);
+	cursor: pointer;
+
 
 	p {
 		padding: 0px 10px 0px 10px;

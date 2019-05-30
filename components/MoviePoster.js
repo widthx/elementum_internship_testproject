@@ -18,7 +18,6 @@ class MoviePoster extends Component {
                     <div className="flip-card-back">
                         <h3>{this.props.meta.title}</h3> 
                         <p>{this.props.meta.overview}</p>
-                        <button>more info</button>
                     </div>
                 </div>            
             </div>

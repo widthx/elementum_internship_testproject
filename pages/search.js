@@ -24,17 +24,28 @@ class Index extends Component {
 
     search_movies = (e) => {
 
-        let input = "";
+        let path, query;
+        let input = false;
         if (e) input = e.target.value;
 
-        let query = {
-            query: input,
-            results: [],
-            api_key: api.key
+        if (input) {
+            path = 'search/movie?';
+            query = {
+                query: input,
+                results: [],
+                api_key: api.key
+            }       
+        } else {
+            path = 'discover/movie?';
+            query = {
+                sort_by: "popularity.desc",
+                api_key: api.key
+            }
         }
+
         query = queryString.stringify(query);
 
-        axios.get(api.base + 'search/movie?' + query).then(res => {
+        axios.get(api.base + path + query).then(res => {
             this.setState({ query_results: res.data.results })
             console.log(this.state.query_results)
         })        

@@ -25,19 +25,15 @@ class Index extends Component {
 
     componentDidMount() {
         let query = {
-            movie_id: window.location.href.split('/')[4],
             api_key: api.key
         }
         query = queryString.stringify(query);
 
-        axios.get(api.base + 'movie?' + query).then(res => {
-            console.log(res)
-            this.setState({ movie_meta: res.data.results })
+        axios.get(api.base + 'movie/'+window.location.href.split('/')[4]+'?' + query).then(res => {
+            this.setState({ movie_meta: res.data })
             console.log(this.state.movie_meta)
         }).catch(err => {
-            this.setState({ error: true })
-
-            console.log(this.state.error);
+            // this.setState({ error: true })
         })
     }
 
@@ -45,14 +41,22 @@ class Index extends Component {
         return (
             <div>
                 <Nav></Nav>
-                <h3>{this.state.error}</h3>
+                {/* <h3>{this.state.error}</h3>
                 { this.state.error &&
                     <div>
                         <h3 className="error">Error:</h3>
                         <h5>This movie doesnt exist!</h5>
                     </div>
-                }
-                <h2>{this.state.movie_meta.title}</h2>
+                } */}
+                <div className="view_movie">
+                    <div className="poster">
+                        <img src={`https://image.tmdb.org/t/p/w300${this.state.movie_meta.poster_path}`}></img>
+                    </div>
+                    <div className="meta">
+                        <h2>{this.state.movie_meta.title}</h2>
+                        <p>{this.state.movie_meta.overview}</p>
+                    </div>
+                </div>
             </div>
         )
     }

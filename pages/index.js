@@ -47,19 +47,8 @@ class Index extends Component {
     render() {
         return (
             <div>
-                <div className="nav">
-                    <div className="left">
-                        <FontAwesomeIcon icon='video' className="video_icon"/>
-                        <a href="/discover">Discover</a>
-                        <a href="/movies">Movies</a>
-                    </div>
-                    <div className="right">
-                        <div className="searchBar">
-                            <FontAwesomeIcon icon='search'/>
-                            <input onClick={() => Router.push('/search')}></input>
-                        </div>
-                    </div>
-                </div>
+                <Nav></Nav>
+
 
                 <div className="movie_posters">
                     <div className="container">

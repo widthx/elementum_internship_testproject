@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Router from 'next/router'
 
 import '../styles/globals.scss';
-import '../styles/home.scss';
 
 import { api } from '../config/api.js';
 

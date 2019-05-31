@@ -21,7 +21,6 @@ class Nav extends Component {
                         <div className="left">
                             <FontAwesomeIcon icon='video' className="video_icon"/>
                             <a href="/discover">Discover</a>
-                            <a href="/movies">Movies</a>
                         </div>
                         <div className="right">
                             <div className="searchBar">

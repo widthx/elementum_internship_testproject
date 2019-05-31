@@ -18,24 +18,28 @@ class Index extends Component {
         super(props);
 
         this.state = {
-            query_results: []
+            query_results: [], //movies
+            genres: [],
+            selected_genres: [],
+            discover: []
         }
     }
 
     search_movies = (e) => {
 
-        let path, query;
+        let path, query, discover;
         let input = false;
         if (e) input = e.target.value;
 
-        if (input) {
+        if (input || this.state.selected_genres[0]) {
             path = 'search/movie?';
             query = {
-                query: input,
-                results: [],
-                api_key: api.key
-            }       
+                with_genres: this.state.selected_genres.join(','),
+                api_key: api.key,
+            }
+            if (input) query['query'] = input;
         } else { //default if no value typed
+            discover = true;
             path = 'discover/movie?';
             query = {
                 sort_by: "popularity.desc",
@@ -47,18 +51,59 @@ class Index extends Component {
 
         axios.get(api.base + path + query).then(res => {
             this.setState({ query_results: res.data.results })
-            console.log(this.state.query_results)
-            query = { api_key: api.key }
-            query = queryString.stringify(query);
 
-            axios.get(api.base + 'genre/movie/list?' + query).then(res => {
-                console.log(res)
-                this.setState({
-                    genres: res.data.genres
+            if (discover) {
+                this.setState({ discover: this.state.query_results })
+            }
+
+            if (!this.state.genres[0]) {
+                query = { api_key: api.key }
+                query = queryString.stringify(query);
+    
+                axios.get(api.base + 'genre/movie/list?' + query).then(res => {
+                    this.setState({
+                        genres: res.data.genres
+                    })
                 })
-            })
-
+            }
         })        
+    }
+
+    sort_movies_by_genre = () => {
+        let sorted = [];
+        //this is slow.. break down movies in chunks
+        if (!this.state.selected_genres[0]) return this.setState({ query_results: this.state.discover})
+
+        for (let a in this.state.query_results) {
+            let movie = this.state.query_results[a];
+            for (let b in movie.genre_ids) {
+                for (let c in this.state.selected_genres) {
+                    if (movie.genre_ids[b] == this.state.selected_genres[c]) sorted.push(movie)
+                }
+            }
+        }
+
+
+        return this.setState({ query_results: sorted });
+ 
+    }
+
+    add_genre = (e) => {
+        let genres = this.state.selected_genres;
+        let id = e.target.value;
+        let remove;
+
+        for (let a in genres) {
+            if (genres[a] == id) remove = a;
+        }
+
+        if (remove)
+            genres.splice(remove, 1);
+        else
+            genres.push(id);
+
+        this.setState({ selected_genres: genres })
+        this.sort_movies_by_genre();
     }
 
     componentDidMount() {
@@ -78,7 +123,7 @@ class Index extends Component {
 
         for (let a in this.state.genres) {
             genres.push(<div>
-                <input type="checkbox" value={this.state.genres[a].name}></input>
+                <input type="checkbox" onClick={(e) => this.add_genre(e)} value={this.state.genres[a].id}></input>
                 <span>{this.state.genres[a].name}</span>
             </div>)
         }
@@ -95,11 +140,13 @@ class Index extends Component {
                             <FontAwesomeIcon icon='search'/>
                             <input onChange={e => this.search_movies(e)}></input>
                         </div>
+                        {/* <a href="/discover">Discover</a> */}
+
                     </div>
                 </div>
                 <div className="sort_movies">
                     <div className="sort_box">
-                        <div className="header"><h3>genre</h3></div>
+                        <div className="header"><h3>Genre</h3></div>
                             {this.generate_genres()}
                     </div>
                 </div>

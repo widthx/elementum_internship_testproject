@@ -29,6 +29,7 @@
 .actors {
     width: 100%;
     height: 200px;
+    margin-top: 40px;
     //background: #f7f7f7;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -44,13 +45,19 @@
         .headshot {
             img {
                 object-fit: cover;
-                border-radius: 50%;
                 height: 100px;
                 width: 100px;
             }
         }
         .actor_meta {
             width: 200px;
+            h4 {
+                margin: 0;
+            }
+
+            .character, .name {
+                margin-top: 10px;
+            }
         }
 
     }

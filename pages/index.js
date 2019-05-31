@@ -48,7 +48,6 @@ class Index extends Component {
             <div>
                 <Nav></Nav>
 
-
                 <div className="movie_posters">
                     <div className="container">
                         <h3 className="title">Popular Movies</h3>

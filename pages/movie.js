@@ -18,9 +18,10 @@ class Index extends Component {
         super(props);
 
         this.state = {
-            error: true,
+            error: false,
             movie_meta: {},
-            credits: {}
+            credits: {},
+            reviews: {}
         }
     }
 
@@ -39,9 +40,16 @@ class Index extends Component {
             axios.get(api.base + 'movie/'+movie_id+'/credits?' + query).then(res => {
                 this.setState({ credits: res.data })
                 console.log(this.state.credits)
+
+                //http://api.themoviedb.org/3/movie/83542/reviews
+                axios.get(api.base + 'movie/' + this.state.movie_meta.id + '/reviews?' + query).then(res => {
+                    this.setState({ reviews: res.data.results });
+                    console.log(this.state.reviews)
+
+                })
             })
         }).catch(err => {
-            // this.setState({ error: true })
+            this.setState({ error: true })
         })
     }
 
@@ -64,37 +72,60 @@ class Index extends Component {
         return (actors);
     }
 
+    generate_reviews = () => {
+        let reviews = [];
+
+        for (let a in this.state.reviews) {
+            reviews.push(<div className="review">
+                <h4 className="author">By, {this.state.reviews[a].author}</h4>
+                <a href={this.state.reviews[a].url} className="see_more">see more</a>
+                <p className="content">{this.state.reviews[a].content}</p>
+            </div>)
+        }
+        return (reviews);
+    }
+
     render() {
         return (
             <div>
                 <Nav></Nav>
-                {/* <h3>{this.state.error}</h3>
-                { this.state.error &&
-                    <div>
-                        <h3 className="error">Error:</h3>
-                        <h5>This movie doesnt exist!</h5>
-                    </div>
-                } */}
-                <div className="view_movie">
-                    <div className="poster">
-                        <img src={`https://image.tmdb.org/t/p/w300${this.state.movie_meta.poster_path}`}></img>
-                    </div>
-                    <div className="meta">
-                        <div className="movie_title">
-                            <h3>{this.state.movie_meta.title}</h3>
-                        </div>
-                        <div className="rating">
-                            <FontAwesomeIcon icon='star' className="star"/>
-                            <h6 className="rating_avg">{this.state.movie_meta.vote_average}</h6>
-                        </div>
+                <h3>{this.state.error}</h3>
 
-                        <p>{this.state.movie_meta.overview}</p>
-
-                        <div className="actors">
-                            {this.generate_actors()}
+                { this.state.error ? (
+                        <div className="error">
+                            <h3>Error:</h3>
+                            <h5>This movie doesnt exist!</h5>
                         </div>
-                    </div>
-                </div>
+                    ) : (
+                    <div className="view_movie">
+                        <div className="poster">
+                            <img src={`https://image.tmdb.org/t/p/w300${this.state.movie_meta.poster_path}`}></img>
+                        </div>
+                        <div className="meta">
+                            <div className="movie_title">
+                                <h3>{this.state.movie_meta.title}</h3>
+                            </div>
+                            <div className="rating">
+                                <FontAwesomeIcon icon='star' className="star"/>
+                                <h6 className="rating_avg">{this.state.movie_meta.vote_average}</h6>
+                            </div>
+
+                            <p>{this.state.movie_meta.overview}</p>
+
+                            <div className="actors">
+                                {this.generate_actors()}
+                            </div>
+
+                            <div className="reviews">
+                                <h4>Reviews:</h4>
+                                {this.generate_reviews()}
+                            </div>
+                        </div>
+                    </div>                        
+                    )
+
+                }
+
             </div>
         )
     }

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -167,15 +167,17 @@ function (_Component) {
           return next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/movie/' + _this2.props.meta.id);
         }
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-        className: "movie_title"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h3", null, this.props.meta.title)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "date"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h5", null, this.props.meta.release_date)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "rating"
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_10__["FontAwesomeIcon"], {
         icon: "star",
         className: "star"
       }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h6", {
         className: "rating_avg"
-      }, this.props.meta.vote_average)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
+      }, this.props.meta.vote_average)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "movie_title"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h3", null, this.props.meta.title)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
         className: "overview"
       }, this.props.meta.overview))));
     }
@@ -683,10 +685,30 @@ function (_Component) {
       return actors;
     });
 
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "generate_reviews", function () {
+      var reviews = [];
+
+      for (var a in _this.state.reviews) {
+        reviews.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+          className: "review"
+        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h4", {
+          className: "author"
+        }, "By, ", _this.state.reviews[a].author), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
+          href: _this.state.reviews[a].url,
+          className: "see_more"
+        }, "see more"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", {
+          className: "content"
+        }, _this.state.reviews[a].content)));
+      }
+
+      return reviews;
+    });
+
     _this.state = {
-      error: true,
+      error: false,
       movie_meta: {},
-      credits: {}
+      credits: {},
+      reviews: {}
     };
     return _this;
   }
@@ -713,15 +735,28 @@ function (_Component) {
             credits: res.data
           });
 
-          console.log(_this2.state.credits);
+          console.log(_this2.state.credits); //http://api.themoviedb.org/3/movie/83542/reviews
+
+          axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].base + 'movie/' + _this2.state.movie_meta.id + '/reviews?' + query).then(function (res) {
+            _this2.setState({
+              reviews: res.data.results
+            });
+
+            console.log(_this2.state.reviews);
+          });
         });
-      }).catch(function (err) {// this.setState({ error: true })
+      }).catch(function (err) {
+        _this2.setState({
+          error: true
+        });
       });
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_Nav__WEBPACK_IMPORTED_MODULE_16__["default"], null), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_Nav__WEBPACK_IMPORTED_MODULE_16__["default"], null), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h3", null, this.state.error), this.state.error ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "error"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h3", null, "Error:"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h5", null, "This movie doesnt exist!")) : react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: "view_movie"
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: "poster"
@@ -740,7 +775,9 @@ function (_Component) {
         className: "rating_avg"
       }, this.state.movie_meta.vote_average)), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", null, this.state.movie_meta.overview), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: "actors"
-      }, this.generate_actors()))));
+      }, this.generate_actors()), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "reviews"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h4", null, "Reviews:"), this.generate_reviews()))));
     }
   }]);
 
@@ -795,7 +832,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/movie.js ***!
   \******************************/

@@ -21,14 +21,16 @@ class MoviePoster extends Component {
                         <img src={`https://image.tmdb.org/t/p/w200${this.props.meta.poster_path}`} />
                     </div>
                     <div className="flip-card-back" onClick={() => Router.push('/movie/'+this.props.meta.id)}>
-                        <div className="movie_title">
-                            <h3>{this.props.meta.title}</h3>
+                        <div className="date">
+                            <h5>{this.props.meta.release_date}</h5>
                         </div>
                         <div className="rating">
                             <FontAwesomeIcon icon='star' className="star"/>
                             <h6 className="rating_avg">{this.props.meta.vote_average}</h6>
                         </div>
-
+                        <div className="movie_title">
+                            <h3>{this.props.meta.title}</h3>
+                        </div>
                         <p className="overview">{this.props.meta.overview}</p>
                     </div>
                 </div> 

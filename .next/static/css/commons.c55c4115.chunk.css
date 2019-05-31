@@ -783,15 +783,10 @@ body {
 .container {
   text-align: center; }
 
-.star {
-  display: inline-block;
-  margin-right: 5px; }
-
-.rating_avg {
-  display: inline-block; }
-
-.rating, .movie_title {
-  display: inline-block; }
+.error {
+  margin-top: 100px;
+  margin-left: 40px;
+  text-align: left; }
 
 .movie_posters {
   margin-top: 120px; }
@@ -811,13 +806,24 @@ body {
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 20px;
-  overflow: scroll; }
+  background: #ececec; }
   .movie_poster .movie_title {
     text-align: left;
     width: 75%; }
+  .movie_poster .date {
+    display: inline-block;
+    float: left;
+    margin-left: 20px; }
   .movie_poster .rating {
     position: absolute;
     right: 10px; }
+  .movie_poster .star {
+    display: inline-block;
+    margin-right: 5px; }
+  .movie_poster .rating_avg {
+    display: inline-block; }
+  .movie_poster .rating, .movie_poster .movie_title {
+    display: inline-block; }
 
 /* This container is needed to position the front and back side */
 .flip-card-inner {
@@ -842,11 +848,11 @@ body {
 
 /* Style the back side */
 .flip-card-back {
-  height: 100vh;
   background-color: #ececec;
   color: #000;
   transform: rotateY(180deg);
-  cursor: pointer; }
+  cursor: pointer;
+  overflow: scroll; }
   .flip-card-back p {
     padding: 0px 10px 0px 10px; }
 

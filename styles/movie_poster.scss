@@ -23,11 +23,19 @@
 	margin-right: 10px;
 	margin-left: 10px;
 	margin-bottom: 20px;
-	overflow: scroll;
+	background: #ececec;
 
 	.movie_title {
 		text-align: left;
 		width: 75%;
+	}
+
+    //rating on movie posters and movie view
+
+	.date {
+		display: inline-block;
+		float: left;
+		margin-left: 20px;
 	}
 
 	.rating {
@@ -35,6 +43,18 @@
 		right: 10px;
 	}
 
+    .star {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .rating_avg {
+        display: inline-block;
+    }
+
+    .rating, .movie_title {
+        display: inline-block;
+    }
 	// .overview {
 	// 	margin-top: 60px;
 	// }
@@ -67,11 +87,11 @@
 /* Style the back side */
 .flip-card-back {
 	//background-color: rgba(0, 0, 0, .8);
-	height: 100vh;
 	background-color: #ececec;
 	color: #000;
 	transform: rotateY(180deg);
 	cursor: pointer;
+    overflow: scroll;
 	//background-image: linear-gradient(to bottom, transparent, black);
 
 

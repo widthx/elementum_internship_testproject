@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -113,161 +113,11 @@ function _classCallCheck(instance, Constructor) {
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("4C77");
+module.exports = __webpack_require__("RNiq");
 
-
-/***/ }),
-
-/***/ "4C77":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0iUn");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("sLSF");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("MI3g");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("a7VT");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("AT/M");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("Tit0");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("vYYK");
-/* harmony import */ var isomorphic_fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("W+0S");
-/* harmony import */ var isomorphic_fetch__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(isomorphic_fetch__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("cDcd");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("zr5I");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("Lc87");
-/* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(query_string__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("uhWA");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("H/sG");
-/* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_scss__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _styles_movie_page_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("kQWU");
-/* harmony import */ var _styles_movie_page_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_styles_movie_page_scss__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _config_api_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("bv8N");
-/* harmony import */ var _components_MoviePoster__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("vOzc");
-/* harmony import */ var _components_Nav__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("oTOh");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var Index =
-/*#__PURE__*/
-function (_Component) {
-  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(Index, _Component);
-
-  function Index(props) {
-    var _this;
-
-    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(this, Index);
-
-    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(Index).call(this, props));
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(_this), "generate_actors", function () {
-      var actors = [];
-      var credits = _this.state.credits;
-
-      for (var a in credits.cast) {
-        actors.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-          className: "actor"
-        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-          className: "headshot"
-        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("img", {
-          src: "https://image.tmdb.org/t/p/w276_and_h350_face".concat(credits.cast[a].profile_path)
-        })), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-          className: "actor_meta"
-        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h4", {
-          className: "name"
-        }, credits.cast[a].name), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h4", {
-          className: "character"
-        }, credits.cast[a].character))));
-      }
-
-      return actors;
-    });
-
-    _this.state = {
-      error: true,
-      movie_meta: {},
-      credits: {}
-    };
-    return _this;
-  }
-
-  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(Index, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var movie_id;
-      var query = {
-        api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_14__[/* api */ "a"].key
-      };
-      query = query_string__WEBPACK_IMPORTED_MODULE_10___default.a.stringify(query);
-      movie_id = window.location.href.split('/')[4];
-      axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__[/* api */ "a"].base + 'movie/' + movie_id + '?' + query).then(function (res) {
-        _this2.setState({
-          movie_meta: res.data
-        });
-
-        console.log(_this2.state.movie_meta);
-        axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__[/* api */ "a"].base + 'movie/' + movie_id + '/credits?' + query).then(function (res) {
-          _this2.setState({
-            credits: res.data
-          });
-
-          console.log(_this2.state.credits);
-        });
-      }).catch(function (err) {// this.setState({ error: true })
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_Nav__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"], null), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "view_movie"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "poster"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("img", {
-        src: "https://image.tmdb.org/t/p/w300".concat(this.state.movie_meta.poster_path)
-      })), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "meta"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "movie_title"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h3", null, this.state.movie_meta.title)), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "rating"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__["FontAwesomeIcon"], {
-        icon: "star",
-        className: "star"
-      }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h6", {
-        className: "rating_avg"
-      }, this.state.movie_meta.vote_average)), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", null, this.state.movie_meta.overview), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "actors"
-      }, this.generate_actors()))));
-    }
-  }]);
-
-  return Index;
-}(react__WEBPACK_IMPORTED_MODULE_8__["Component"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (Index);
 
 /***/ }),
 
@@ -360,6 +210,122 @@ function _possibleConstructorReturn(self, call) {
 
   return Object(assertThisInitialized["a" /* default */])(self);
 }
+
+/***/ }),
+
+/***/ "RNiq":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0iUn");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("sLSF");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("MI3g");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("a7VT");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("AT/M");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("Tit0");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("vYYK");
+/* harmony import */ var isomorphic_fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("W+0S");
+/* harmony import */ var isomorphic_fetch__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(isomorphic_fetch__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("cDcd");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("zr5I");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("Lc87");
+/* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(query_string__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("uhWA");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("4Q3z");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("H/sG");
+/* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_scss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _config_api_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("bv8N");
+/* harmony import */ var _components_MoviePoster__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("vOzc");
+/* harmony import */ var _components_Nav__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("oTOh");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Index =
+/*#__PURE__*/
+function (_Component) {
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(Index, _Component);
+
+  function Index(props) {
+    var _this;
+
+    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(this, Index);
+
+    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(Index).call(this, props));
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(_this), "generate_posters", function () {
+      var posters = [];
+
+      for (var a in _this.state.popular_movies) {
+        posters.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_MoviePoster__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"], {
+          meta: _this.state.popular_movies[a],
+          key: a
+        }));
+      }
+
+      return posters;
+    });
+
+    _this.state = {
+      popular_movies: []
+    };
+    return _this;
+  }
+
+  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(Index, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var query = {
+        sort_by: "popularity.desc",
+        api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_14__[/* api */ "a"].key
+      };
+      query = query_string__WEBPACK_IMPORTED_MODULE_10___default.a.stringify(query);
+      axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__[/* api */ "a"].base + 'discover/movie?' + query).then(function (res) {
+        _this2.setState({
+          popular_movies: res.data.results
+        });
+
+        console.log(_this2.state.popular_movies);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_Nav__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"], null), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "movie_posters"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h3", {
+        className: "title"
+      }, "Popular Movies"), this.generate_posters())));
+    }
+  }]);
+
+  return Index;
+}(react__WEBPACK_IMPORTED_MODULE_8__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Index);
 
 /***/ }),
 
@@ -521,13 +487,6 @@ module.exports = __webpack_require__("TUA0");
 /***/ }),
 
 /***/ "hzN+":
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ "kQWU":
 /***/ (function(module, exports) {
 
 
@@ -721,15 +680,17 @@ function (_Component) {
           return next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/movie/' + _this2.props.meta.id);
         }
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-        className: "movie_title"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h3", null, this.props.meta.title)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "date"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h5", null, this.props.meta.release_date)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "rating"
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_10__["FontAwesomeIcon"], {
         icon: "star",
         className: "star"
       }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h6", {
         className: "rating_avg"
-      }, this.props.meta.vote_average)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
+      }, this.props.meta.vote_average)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "movie_title"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h3", null, this.props.meta.title)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
         className: "overview"
       }, this.props.meta.overview))));
     }

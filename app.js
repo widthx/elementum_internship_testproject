@@ -30,4 +30,4 @@ const start = async (port) => {
 };
 
 // Start the express server.
-start(3001, (process.env.NODE_ENV ? "172.26.10.134" : false));
+start(3001);

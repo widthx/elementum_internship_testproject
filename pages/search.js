@@ -6,7 +6,7 @@ import queryString from 'query-string'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import '../styles/globals.scss';
-import '../styles/movie_page.scss';
+import '../styles/search.scss';
 
 import { api } from '../config/api.js';
 
@@ -35,7 +35,7 @@ class Index extends Component {
                 results: [],
                 api_key: api.key
             }       
-        } else {
+        } else { //default if no value typed
             path = 'discover/movie?';
             query = {
                 sort_by: "popularity.desc",
@@ -48,6 +48,16 @@ class Index extends Component {
         axios.get(api.base + path + query).then(res => {
             this.setState({ query_results: res.data.results })
             console.log(this.state.query_results)
+            query = { api_key: api.key }
+            query = queryString.stringify(query);
+
+            axios.get(api.base + 'genre/movie/list?' + query).then(res => {
+                console.log(res)
+                this.setState({
+                    genres: res.data.genres
+                })
+            })
+
         })        
     }
 
@@ -63,15 +73,34 @@ class Index extends Component {
         return (posters);
     }
 
+    generate_genres = () => {
+        let genres = [];
+
+        for (let a in this.state.genres) {
+            genres.push(<div>
+                <input type="checkbox" value={this.state.genres[a].name}></input>
+                <span>{this.state.genres[a].name}</span>
+            </div>)
+        }
+        return (genres);
+    }
+
     render() {
         return (
-            <div>
+            <div className="search">
                 <div className="nav">
                     <div className="left">
+                        {/* <FontAwesomeIcon icon='video' className="video_icon"/> */}
                         <div className="searchBar">
                             <FontAwesomeIcon icon='search'/>
                             <input onChange={e => this.search_movies(e)}></input>
                         </div>
+                    </div>
+                </div>
+                <div className="sort_movies">
+                    <div className="sort_box">
+                        <div className="header"><h3>genre</h3></div>
+                            {this.generate_genres()}
                     </div>
                 </div>
                 <div className="movie_posters">

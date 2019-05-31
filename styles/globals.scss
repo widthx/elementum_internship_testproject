@@ -13,3 +13,19 @@ body {
 .container {
     text-align: center;
 }
+
+
+//rating on movie posters and movie view
+
+.star {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.rating_avg {
+    display: inline-block;
+}
+
+.rating, .movie_title {
+    display: inline-block;
+}

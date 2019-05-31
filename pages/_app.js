@@ -4,7 +4,7 @@ import App, { Container } from 'next/app';
 import { library, config, dom } from '@fortawesome/fontawesome-svg-core' 
 import { faSearch, faVideo, faStar } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSearch, faVideo, faStar)
+library.add(faSearch, faVideo, faStar )
 config.autoAddCss = false //removes enlarged icons on reload
 
 class MyApp extends App {

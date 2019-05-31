@@ -7,6 +7,7 @@
 		color: #c3c3c3;
 		margin-bottom: 40px;
 	}
+	
 }
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
@@ -22,6 +23,21 @@
 	margin-right: 10px;
 	margin-left: 10px;
 	margin-bottom: 20px;
+	overflow: scroll;
+
+	.movie_title {
+		text-align: left;
+		width: 75%;
+	}
+
+	.rating {
+		position: absolute;
+		right: 10px;
+	}
+
+	// .overview {
+	// 	margin-top: 60px;
+	// }
 }
 
 /* This container is needed to position the front and back side */
@@ -55,6 +71,7 @@
 	color: #000;
 	transform: rotateY(180deg);
 	cursor: pointer;
+	//background-image: linear-gradient(to bottom, transparent, black);
 
 
 	p {

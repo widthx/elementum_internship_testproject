@@ -18,7 +18,9 @@ class Index extends Component {
         super(props);
 
         this.state = {
+            query: false,
             query_results: [], //movies
+            sorted: false, //or []
             genres: [],
             selected_genres: [],
             discover: []
@@ -37,7 +39,15 @@ class Index extends Component {
                 with_genres: this.state.selected_genres.join(','),
                 api_key: api.key,
             }
+
             if (input) query['query'] = input;
+
+            //state query can be false
+            if (input == "")
+                this.setState({ query: false })
+            else
+                this.setState({ query: input })
+
         } else { //default if no value typed
             discover = true;
             path = 'discover/movie?';
@@ -46,11 +56,15 @@ class Index extends Component {
                 api_key: api.key
             }
         }
-
+        
         query = queryString.stringify(query);
 
         axios.get(api.base + path + query).then(res => {
             this.setState({ query_results: res.data.results })
+
+            //was missing this
+            if (this.state.selected_genres[0])
+                this.sort_movies_by_genre()
 
             if (discover) {
                 this.setState({ discover: this.state.query_results })
@@ -66,25 +80,35 @@ class Index extends Component {
                     })
                 })
             }
-        })        
+        })
+
     }
 
     sort_movies_by_genre = () => {
         let sorted = [];
-        //this is slow.. break down movies in chunks
-        if (!this.state.selected_genres[0]) return this.setState({ query_results: this.state.discover})
+        
+        //set results to discover if
+        console.log(this.state.query)
+        if (!this.state.selected_genres[0] && !this.state.query) return this.setState({ query_results: this.state.discover })
 
         for (let a in this.state.query_results) {
             let movie = this.state.query_results[a];
+            let match;
+
             for (let b in movie.genre_ids) {
                 for (let c in this.state.selected_genres) {
-                    if (movie.genre_ids[b] == this.state.selected_genres[c]) sorted.push(movie)
+                    // I wasnt accounting for there being multiple matches per movie
+                    if (movie.genre_ids[b] == this.state.selected_genres[c] && !match) {
+                        match = true;
+                        sorted.push(movie)
+                    }
                 }
             }
         }
-
-
-        return this.setState({ query_results: sorted });
+        console.log(sorted);
+        // I was over-writing the existing search query
+        this.setState({ sorted: sorted });
+        return ;
  
     }
 
@@ -101,9 +125,15 @@ class Index extends Component {
             genres.splice(remove, 1);
         else
             genres.push(id);
-
+        
         this.setState({ selected_genres: genres })
-        this.sort_movies_by_genre();
+
+        //reset sorted results
+        if (!genres[0])
+            this.setState({ sorted: false })
+        else
+            this.sort_movies_by_genre();
+
     }
 
     componentDidMount() {
@@ -111,10 +141,18 @@ class Index extends Component {
     }
 
     generate_posters = () => {
-        let posters = [];
-        for (let a in this.state.query_results) {
-            posters.push(<MoviePoster meta={this.state.query_results[a]} key={a}></MoviePoster>)
+        let posters = [], movies;
+
+        // only display sorted options if there are elements .. if not display search results
+        if (this.state.sorted) movies = this.state.sorted;
+        else movies = this.state.query_results
+
+        if (movies[0]) {
+            for (let a in movies) {
+                posters.push(<MoviePoster meta={movies[a]} key={a}></MoviePoster>)
+            }
         }
+
         return (posters);
     }
 

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -113,7 +113,7 @@ function _classCallCheck(instance, Constructor) {
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("eOhz");
@@ -426,7 +426,13 @@ function (_Component) {
           with_genres: _this.state.selected_genres.join(','),
           api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_14__[/* api */ "a"].key
         };
-        if (input) query['query'] = input;
+        if (input) query['query'] = input; //state query can be false
+
+        if (input == "") _this.setState({
+          query: false
+        });else _this.setState({
+          query: input
+        });
       } else {
         //default if no value typed
         discover = true;
@@ -441,7 +447,10 @@ function (_Component) {
       axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__[/* api */ "a"].base + path + query).then(function (res) {
         _this.setState({
           query_results: res.data.results
-        });
+        }); //was missing this
+
+
+        if (_this.state.selected_genres[0]) _this.sort_movies_by_genre();
 
         if (discover) {
           _this.setState({
@@ -464,25 +473,35 @@ function (_Component) {
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(_this), "sort_movies_by_genre", function () {
-      var sorted = []; //this is slow.. break down movies in chunks
+      var sorted = []; //set results to discover if
 
-      if (!_this.state.selected_genres[0]) return _this.setState({
+      console.log(_this.state.query);
+      if (!_this.state.selected_genres[0] && !_this.state.query) return _this.setState({
         query_results: _this.state.discover
       });
 
       for (var a in _this.state.query_results) {
         var movie = _this.state.query_results[a];
+        var match = void 0;
 
         for (var b in movie.genre_ids) {
           for (var c in _this.state.selected_genres) {
-            if (movie.genre_ids[b] == _this.state.selected_genres[c]) sorted.push(movie);
+            // I wasnt accounting for there being multiple matches per movie
+            if (movie.genre_ids[b] == _this.state.selected_genres[c] && !match) {
+              match = true;
+              sorted.push(movie);
+            }
           }
         }
       }
 
-      return _this.setState({
-        query_results: sorted
+      console.log(sorted); // I was over-writing the existing search query
+
+      _this.setState({
+        sorted: sorted
       });
+
+      return;
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(_this), "add_genre", function (e) {
@@ -498,19 +517,27 @@ function (_Component) {
 
       _this.setState({
         selected_genres: genres
-      });
+      }); //reset sorted results
 
-      _this.sort_movies_by_genre();
+
+      if (!genres[0]) _this.setState({
+        sorted: false
+      });else _this.sort_movies_by_genre();
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(_this), "generate_posters", function () {
-      var posters = [];
+      var posters = [],
+          movies; // only display sorted options if there are elements .. if not display search results
 
-      for (var a in _this.state.query_results) {
-        posters.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_MoviePoster__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"], {
-          meta: _this.state.query_results[a],
-          key: a
-        }));
+      if (_this.state.sorted) movies = _this.state.sorted;else movies = _this.state.query_results;
+
+      if (movies[0]) {
+        for (var a in movies) {
+          posters.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_MoviePoster__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"], {
+            meta: movies[a],
+            key: a
+          }));
+        }
       }
 
       return posters;
@@ -533,8 +560,11 @@ function (_Component) {
     });
 
     _this.state = {
+      query: false,
       query_results: [],
       //movies
+      sorted: false,
+      //or []
       genres: [],
       selected_genres: [],
       discover: []

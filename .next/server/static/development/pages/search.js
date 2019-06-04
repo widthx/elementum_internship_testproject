@@ -599,10 +599,10 @@ function _typeof(obj) {
 
 /***/ }),
 
-/***/ "./pages/movie.js":
-/*!************************!*\
-  !*** ./pages/movie.js ***!
-  \************************/
+/***/ "./pages/search.js":
+/*!*************************!*\
+  !*** ./pages/search.js ***!
+  \*************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -627,8 +627,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../styles/globals.scss */ "./styles/globals.scss");
 /* harmony import */ var _styles_globals_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_scss__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _styles_movie_page_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../styles/movie_page.scss */ "./styles/movie_page.scss");
-/* harmony import */ var _styles_movie_page_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_styles_movie_page_scss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _styles_search_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../styles/search.scss */ "./styles/search.scss");
+/* harmony import */ var _styles_search_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_styles_search_scss__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _config_api_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../config/api.js */ "./config/api.js");
 /* harmony import */ var _components_MoviePoster__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/MoviePoster */ "./components/MoviePoster.js");
 /* harmony import */ var _components_Nav__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/Nav */ "./components/Nav.js");
@@ -662,53 +662,159 @@ function (_Component) {
 
     _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(Index).call(this, props));
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "generate_actors", function () {
-      var actors = [];
-      var credits = _this.state.credits;
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "search_movies", function (e) {
+      var path, query, discover;
+      var input = false;
+      if (e) input = e.target.value;
 
-      for (var a in credits.cast) {
-        actors.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-          className: "actor"
-        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-          className: "headshot"
-        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("img", {
-          src: "https://image.tmdb.org/t/p/w276_and_h350_face".concat(credits.cast[a].profile_path)
-        })), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-          className: "actor_meta"
-        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h4", {
-          className: "name"
-        }, credits.cast[a].name), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h4", {
-          className: "character"
-        }, credits.cast[a].character))));
+      if (input || _this.state.selected_genres[0]) {
+        path = 'search/movie?';
+        query = {
+          with_genres: _this.state.selected_genres.join(','),
+          api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].key
+        };
+        if (input) query['query'] = input; //state query can be false
+
+        if (input == "") _this.setState({
+          query: false
+        });else _this.setState({
+          query: input
+        });
+      } else {
+        //default if no value typed
+        discover = true;
+        path = 'discover/movie?';
+        query = {
+          sort_by: "popularity.desc",
+          api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].key
+        };
       }
 
-      return actors;
+      query = query_string__WEBPACK_IMPORTED_MODULE_10___default.a.stringify(query);
+      axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].base + path + query).then(function (res) {
+        _this.setState({
+          query_results: res.data.results
+        }); //was missing this
+
+
+        if (_this.state.selected_genres[0]) _this.sort_movies_by_genre();
+
+        if (discover) {
+          _this.setState({
+            discover: _this.state.query_results
+          });
+        }
+
+        if (!_this.state.genres[0]) {
+          query = {
+            api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].key
+          };
+          query = query_string__WEBPACK_IMPORTED_MODULE_10___default.a.stringify(query);
+          axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].base + 'genre/movie/list?' + query).then(function (res) {
+            _this.setState({
+              genres: res.data.genres
+            });
+          });
+        }
+      });
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "generate_reviews", function () {
-      var reviews = [];
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "sort_movies_by_genre", function () {
+      var sorted = []; //set results to discover if
 
-      for (var a in _this.state.reviews) {
-        reviews.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-          className: "review"
-        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h4", {
-          className: "author"
-        }, "By, ", _this.state.reviews[a].author), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
-          href: _this.state.reviews[a].url,
-          className: "see_more"
-        }, "see more"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", {
-          className: "content"
-        }, _this.state.reviews[a].content)));
+      console.log(_this.state.query);
+      if (!_this.state.selected_genres[0] && !_this.state.query) return _this.setState({
+        query_results: _this.state.discover
+      });
+
+      for (var a in _this.state.query_results) {
+        var movie = _this.state.query_results[a];
+        var match = void 0;
+
+        for (var b in movie.genre_ids) {
+          for (var c in _this.state.selected_genres) {
+            // I wasnt accounting for there being multiple matches per movie
+            if (movie.genre_ids[b] == _this.state.selected_genres[c] && !match) {
+              match = true;
+              sorted.push(movie);
+            }
+          }
+        }
       }
 
-      return reviews;
+      console.log(sorted); // I was over-writing the existing search query
+
+      _this.setState({
+        sorted: sorted
+      });
+
+      return;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "add_genre", function (e) {
+      var genres = _this.state.selected_genres;
+      var id = e.target.value;
+      var remove;
+
+      for (var a in genres) {
+        if (genres[a] == id) remove = a;
+      }
+
+      if (remove) genres.splice(remove, 1);else genres.push(id);
+
+      _this.setState({
+        selected_genres: genres
+      }); //reset sorted results
+
+
+      if (!genres[0]) _this.setState({
+        sorted: false
+      });else _this.sort_movies_by_genre();
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "generate_posters", function () {
+      var posters = [],
+          movies; // only display sorted options if there are elements .. if not display search results
+
+      if (_this.state.sorted) movies = _this.state.sorted;else movies = _this.state.query_results;
+
+      if (movies[0]) {
+        for (var a in movies) {
+          posters.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_MoviePoster__WEBPACK_IMPORTED_MODULE_15__["default"], {
+            meta: movies[a],
+            key: a
+          }));
+        }
+      }
+
+      return posters;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "generate_genres", function () {
+      var genres = [];
+
+      for (var a in _this.state.genres) {
+        genres.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("input", {
+          type: "checkbox",
+          onClick: function onClick(e) {
+            return _this.add_genre(e);
+          },
+          value: _this.state.genres[a].id
+        }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("span", null, _this.state.genres[a].name)));
+      }
+
+      return genres;
     });
 
     _this.state = {
-      error: false,
-      movie_meta: {},
-      credits: {},
-      reviews: {}
+      query: false,
+      query_results: [],
+      //movies
+      sorted: false,
+      //or []
+      genres: [],
+      selected_genres: [],
+      discover: []
     };
     return _this;
   }
@@ -716,68 +822,38 @@ function (_Component) {
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Index, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
-      var movie_id;
-      var query = {
-        api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].key
-      };
-      query = query_string__WEBPACK_IMPORTED_MODULE_10___default.a.stringify(query);
-      movie_id = window.location.href.split('/')[4];
-      axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].base + 'movie/' + movie_id + '?' + query).then(function (res) {
-        _this2.setState({
-          movie_meta: res.data
-        });
-
-        console.log(_this2.state.movie_meta);
-        axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].base + 'movie/' + movie_id + '/credits?' + query).then(function (res) {
-          _this2.setState({
-            credits: res.data
-          });
-
-          console.log(_this2.state.credits); //http://api.themoviedb.org/3/movie/83542/reviews
-
-          axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].base + 'movie/' + _this2.state.movie_meta.id + '/reviews?' + query).then(function (res) {
-            _this2.setState({
-              reviews: res.data.results
-            });
-
-            console.log(_this2.state.reviews);
-          });
-        });
-      }).catch(function (err) {
-        _this2.setState({
-          error: true
-        });
-      });
+      this.search_movies();
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_Nav__WEBPACK_IMPORTED_MODULE_16__["default"], null), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h3", null, this.state.error), this.state.error ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "error"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h3", null, "Error:"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h5", null, "This movie doesnt exist!")) : react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "view_movie"
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "search"
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "poster"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("img", {
-        src: "https://image.tmdb.org/t/p/w300".concat(this.state.movie_meta.poster_path)
-      })), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "meta"
+        className: "nav"
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "movie_title"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h3", null, this.state.movie_meta.title)), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "rating"
+        className: "left"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "searchBar"
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__["FontAwesomeIcon"], {
-        icon: "star",
-        className: "star"
-      }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h6", {
-        className: "rating_avg"
-      }, this.state.movie_meta.vote_average)), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", null, this.state.movie_meta.overview), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "actors"
-      }, this.generate_actors()), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
-        className: "reviews"
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h4", null, "Reviews:"), this.generate_reviews()))));
+        icon: "search"
+      }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("input", {
+        onChange: function onChange(e) {
+          return _this2.search_movies(e);
+        }
+      })))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "sort_movies"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "sort_box"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "header"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h3", null, "Genre")), this.generate_genres())), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "movie_posters"
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+        className: "container"
+      }, this.generate_posters())));
     }
   }]);
 
@@ -792,17 +868,6 @@ function (_Component) {
 /*!*****************************!*\
   !*** ./styles/globals.scss ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ "./styles/movie_page.scss":
-/*!********************************!*\
-  !*** ./styles/movie_page.scss ***!
-  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -832,14 +897,25 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./styles/search.scss":
+/*!****************************!*\
+  !*** ./styles/search.scss ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
 /***/ 3:
-/*!******************************!*\
-  !*** multi ./pages/movie.js ***!
-  \******************************/
+/*!*******************************!*\
+  !*** multi ./pages/search.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/maxchandler/Desktop/elementum/test_project/pages/movie.js */"./pages/movie.js");
+module.exports = __webpack_require__(/*! /Users/maxchandler/Desktop/elementum/test_project/pages/search.js */"./pages/search.js");
 
 
 /***/ }),
@@ -977,4 +1053,4 @@ module.exports = require("react");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=movie.js.map
+//# sourceMappingURL=search.js.map

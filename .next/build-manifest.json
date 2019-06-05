@@ -1,21 +1,49 @@
 {
-  "devFiles": [
-    "static/development/dll/dll_2011977376de5c4d4cfb.js"
-  ],
+  "devFiles": [],
   "pages": {
+    "/": [
+      "static/runtime/webpack-8ed9452df514b4d17d80.js",
+      "static/css/commons.04c78811.chunk.css",
+      "static/chunks/commons.fe639272128b5044ae00.js",
+      "static/css/styles.e8442778.chunk.css",
+      "static/chunks/styles.bfaf7659fe8e37a5365f.js",
+      "static/runtime/main-50a3cc69fbc016d00f83.js"
+    ],
     "/_app": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+      "static/runtime/webpack-8ed9452df514b4d17d80.js",
+      "static/css/commons.04c78811.chunk.css",
+      "static/chunks/commons.fe639272128b5044ae00.js",
+      "static/runtime/main-50a3cc69fbc016d00f83.js"
     ],
     "/_error": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+      "static/runtime/webpack-8ed9452df514b4d17d80.js",
+      "static/css/commons.04c78811.chunk.css",
+      "static/chunks/commons.fe639272128b5044ae00.js",
+      "static/runtime/main-50a3cc69fbc016d00f83.js"
+    ],
+    "/index": [
+      "static/runtime/webpack-8ed9452df514b4d17d80.js",
+      "static/css/commons.04c78811.chunk.css",
+      "static/chunks/commons.fe639272128b5044ae00.js",
+      "static/css/styles.e8442778.chunk.css",
+      "static/chunks/styles.bfaf7659fe8e37a5365f.js",
+      "static/runtime/main-50a3cc69fbc016d00f83.js"
+    ],
+    "/movie": [
+      "static/runtime/webpack-8ed9452df514b4d17d80.js",
+      "static/css/commons.04c78811.chunk.css",
+      "static/chunks/commons.fe639272128b5044ae00.js",
+      "static/css/styles.e8442778.chunk.css",
+      "static/chunks/styles.bfaf7659fe8e37a5365f.js",
+      "static/runtime/main-50a3cc69fbc016d00f83.js"
     ],
     "/search": [
-      "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
+      "static/runtime/webpack-8ed9452df514b4d17d80.js",
+      "static/css/commons.04c78811.chunk.css",
+      "static/chunks/commons.fe639272128b5044ae00.js",
+      "static/css/styles.e8442778.chunk.css",
+      "static/chunks/styles.bfaf7659fe8e37a5365f.js",
+      "static/runtime/main-50a3cc69fbc016d00f83.js"
     ]
   }
 }

@@ -15116,16 +15116,23 @@ function (_Component) {
       if (input || _this.state.selected_genres[0]) {
         path = 'search/movie?';
         query = {
-          with_genres: _this.state.selected_genres.join(','),
           api_key: _config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].key
         };
-        if (input) query['query'] = input; //state query can be false
-
-        if (input == "") _this.setState({
-          query: false
-        });else _this.setState({
+        if (input) query['query'] = input;
+        if (input == "") input = false;
+        if (input) _this.setState({
           query: input
-        });
+        });else {
+          //this fixed an empty search bar with selected genres.
+          _this.setState({
+            query: false,
+            query_results: _this.state.discover
+          }, function () {
+            _this.sort_movies_by_genre();
+          });
+
+          return;
+        }
       } else {
         //default if no value typed
         discover = true;
@@ -15136,6 +15143,7 @@ function (_Component) {
         };
       }
 
+      console.log(_this.state.query);
       query = query_string__WEBPACK_IMPORTED_MODULE_10___default.a.stringify(query);
       axios__WEBPACK_IMPORTED_MODULE_9___default.a.get(_config_api_js__WEBPACK_IMPORTED_MODULE_14__["api"].base + path + query).then(function (res) {
         _this.setState({
@@ -15166,10 +15174,10 @@ function (_Component) {
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "sort_movies_by_genre", function () {
-      var sorted = []; //set results to discover if
+      var sorted = [];
+      var default_results; //if no genres selected display discover results
 
-      console.log(_this.state.query);
-      if (!_this.state.selected_genres[0] && !_this.state.query) return _this.setState({
+      if (!_this.state.selected_genres[0]) return _this.setState({
         query_results: _this.state.discover
       });
 
@@ -15188,7 +15196,7 @@ function (_Component) {
         }
       }
 
-      console.log(sorted); // I was over-writing the existing search query
+      console.log("sorted", sorted); // I was over-writing the existing search query
 
       _this.setState({
         sorted: sorted

@@ -36,17 +36,20 @@ class Index extends Component {
         if (input || this.state.selected_genres[0]) {
             path = 'search/movie?';
             query = {
-                with_genres: this.state.selected_genres.join(','),
                 api_key: api.key,
             }
 
             if (input) query['query'] = input;
 
-            //state query can be false
-            if (input == "")
-                this.setState({ query: false })
-            else
-                this.setState({ query: input })
+            if (input == "") input = false;
+            if (input) this.setState({ query: input })
+            else {
+                //this fixed an empty search bar with selected genres.
+                this.setState({ query: false, query_results: this.state.discover }, () => {
+                    this.sort_movies_by_genre()
+                })
+                return ;
+            }
 
         } else { //default if no value typed
             discover = true;
@@ -56,7 +59,9 @@ class Index extends Component {
                 api_key: api.key
             }
         }
-        
+
+        console.log(this.state.query)
+
         query = queryString.stringify(query);
 
         axios.get(api.base + path + query).then(res => {
@@ -86,10 +91,10 @@ class Index extends Component {
 
     sort_movies_by_genre = () => {
         let sorted = [];
-        
-        //set results to discover if
-        console.log(this.state.query)
-        if (!this.state.selected_genres[0] && !this.state.query) return this.setState({ query_results: this.state.discover })
+        let default_results;
+
+        //if no genres selected display discover results
+        if (!this.state.selected_genres[0]) return this.setState({ query_results: this.state.discover })
 
         for (let a in this.state.query_results) {
             let movie = this.state.query_results[a];
@@ -105,7 +110,7 @@ class Index extends Component {
                 }
             }
         }
-        console.log(sorted);
+        console.log("sorted", sorted);
         // I was over-writing the existing search query
         this.setState({ sorted: sorted });
         return ;

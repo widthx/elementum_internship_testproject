@@ -37,7 +37,7 @@
     "mongoose": "^5.4.2",
     "morgan": "^1.9.0",
     "next": "latest",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.13.1",
     "normalize-scss": "^7.0.1",
     "query-string": "^6.5.0",
     "react": "^16.7.0",
